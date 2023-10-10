@@ -1,0 +1,166 @@
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Work Order Software</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/responsive2.css') }}">
+
+<!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styleMain.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/forms.css') }}">
+ -->
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<script>
+    window.MAPBOX_TOKEN = "{{ MAPBOX_TOKEN }}";
+    window.MI_API_KEY = "{{ MI_API_KEY }}";
+</script>
+
+<script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+
+
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+
+
+    <script src="https://app.mapsindoors.com/mapsindoors/js/sdk/4.24.8/mapsindoors-4.24.8.js?apikey={{ mapsindoors_api_key }}"></script>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#"><img src="src/images/logo.png" alt="Logo"></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <header>
+        <h1>Submit a new work order!</h1>
+    </header>
+    <div class="app-container">
+        <div class="sidebar">
+            <form id="complete-work-order-form">
+<div class="form-group selector">
+  <select id="venue-select" required>
+    <option value="" disabled selected>Select Venue</option>
+    <!-- Options will be appended here dynamically or manually -->
+  </select>
+</div>
+
+<div class="form-group selector">
+  <select id="building-select" required>
+    <option value="" disabled selected>Select Building</option>
+    <!-- Options will be appended here dynamically or manually -->
+  </select>
+</div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="building-address">Building Address:</label>
+            <div id="building-address"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="mi-search-container">
+                <mi-search id="search-input" mapsindoors="true" google="false" placeholder="Enter Place Name"></mi-search>
+                <mi-list id="search-list"></mi-list>
+            </div>
+
+
+<div class="work-orders-form">
+    <form id="work-order-form">
+        <h2>Submit Work Order</h2>
+        
+        <div class="form-group">
+            <input type="text" id="requester-name" name="requester-name" required placeholder="Your Name">
+        </div>
+        
+        <div class="form-group">
+            <input type="text" id="requester-contact" name="requester-contact" required placeholder="Your Contact Details">
+        </div>
+
+        <div id="location-info">
+            <h3>Location Information</h3>
+            <table class="styled-table">
+                <tr>
+                    <td>Name</td>
+                    <td id="location-name"></td>
+                    <td>Building</td>
+                    <td id="location-building"></td>
+                </tr>
+                <tr>
+                    <td>Venue</td>
+                    <td id="location-venue"></td>
+                    <td>Floor Name</td>
+                    <td id="location-floor"></td>
+                </tr>
+                <tr>
+                    <td>Type</td>
+                    <td id="location-type"></td>
+                    <td>Room ID</td>
+                    <td id="location-externalId"></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="form-group">
+            <input type="text" id="work-order-title" name="work-order-title" required placeholder="Work Order Title">
+        </div>
+
+        <div class="form-group">
+            <select name="category" id="categorySelector" required>
+                <option value="" disabled selected>Select Category</option>
+                {% for category in categories %}
+                <option value="{{ category.category_id }}" data-building-id="{{ category.building_id }}">
+                    {{ category.category_title }} (ID: {{ category.category_id }}, Building ID: {{ category.building_id }})
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <textarea id="work-order-description" name="work-order-description" rows="4" required placeholder="Description"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <select id="work-order-priority" name="work-order-priority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input type="date" id="work-order-date" name="work-order-date" required placeholder="Date Needed">
+        </div>
+
+        <div class="form-group">
+            <input type="file" id="work-order-attachment" name="work-order-attachment" accept="image/png, image/jpeg, image/jpg, image/gif, image/webp">
+        </div>
+  </div>
+
+        
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+            
+
+        </div>
+        <div class="content">
+            <div id="map" class="map"></div>
+        </div>
+    </div>
+<script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

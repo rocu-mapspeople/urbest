@@ -1,0 +1,135 @@
+/* Reset & Global Styles */
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  background-color: #f4f5f7;
+}
+
+/* Main Layout */
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 90vw;
+  margin-top: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar {
+  flex: 1;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  overflow: auto;
+  padding: 30px;
+}
+
+.content {
+  flex: 2;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-left: 10px;
+}
+
+.map {
+  flex: 1;
+  height: 80%;
+  width: 100%;
+}
+
+/* Navigation */
+nav {
+  background-color: #508f4a;
+  width: 100%;
+  position: fixed;      /* This will make it stick to the top */
+  top: 0;               /* Align it to the top */
+  left: 0;              /* Align it to the left, ensuring it spans the full width */
+  z-index: 1000;        /* Ensuring it stays on top of other content */
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.nav-logo img {
+  width: auto;
+  height: 40px;
+  margin-left: 5px;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.nav-menu li a {
+  display: block;
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-menu li a:hover {
+  background-color: #0056b3;
+}
+
+/* Utility & Components */
+button, .work-orders-form button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4e89ae;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover, .work-orders-form button:hover {
+  background-color: #396582;
+}
+
+.styled-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table th, .styled-table td {
+  padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr.active-row {
+  font-weight: bold;
+  color: #009879;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #f3f4f6;
+}

@@ -1,0 +1,106 @@
+/* Work Orders Form */
+
+h2 {
+    font-size: 24px; /* Reduce size as necessary */
+    margin-bottom: 10px; /* Reduce margin to bring content closer */
+}
+.work-orders-form {
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.work-orders-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.work-orders-form label {
+  font-weight: bold;
+   margin: 5px 0; 
+}
+
+.work-orders-form input,
+.work-orders-form textarea,
+.work-orders-form select {
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.work-orders-form input {
+    padding: 8px; /* Reduced padding for a smaller input field */
+    margin-bottom: 10px; /* Reduced bottom margin to bring fields closer together */
+}
+
+.work-orders-form button {
+  margin-top: 20px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #508f4a;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.work-orders-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Search Input */
+.mi-search-container .mi-search input[type="search"] {
+  background-color: #FFFFFF;
+  border: 2px solid #888;
+  outline: none;
+  padding: 8px;
+  width: 100%;
+  color: #333;
+  font-size: 16px;
+}
+
+.mi-search-container .mi-search input[type="search"]::placeholder {
+  color: #666;
+}
+
+.mi-search-container .mi-search input[type="search"]:focus {
+  border-color: #0056b3;
+}
+
+/* Venue Selector and General Form Elements */
+.venueselector-container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.form-row {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  width: 100%;
+  font-size 14px;
+  font-weight: bold;
+  display: block;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* Building Address */
+#building-address div {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f7f7f7;
+  text-align: left;
+  font-size: 14px;
+}

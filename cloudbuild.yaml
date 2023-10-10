@@ -1,0 +1,27 @@
+steps:
+  # Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/rocu-test-project/urbest-app:$COMMIT_SHA'
+      - '.'
+  # Push the Docker image to Google Container Registry (GCR)
+  - name: 'gcr.io/cloud-builders/docker'
+    args: 
+      - 'push'
+      - 'gcr.io/rocu-test-project/urbest-app:$COMMIT_SHA'
+  # Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'urbest-app'  
+      - '--image'
+      - 'gcr.io/rocu-test-project/urbest-app:$COMMIT_SHA'
+      - '--platform'
+      - 'managed'
+      - '--region'
+      - 'europe-west3'
+      - '--allow-unauthenticated'

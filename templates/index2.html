@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Work Order Software</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.6/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap1.css') }}">
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://app.mapsindoors.com/mapsindoors/js/sdk/4.24.8/mapsindoors-4.24.8.js?apikey={{ mapsindoors_api_key }}"></script>
+    <script>
+        window.MAPBOX_TOKEN = "{{ MAPBOX_TOKEN }}";
+        window.MI_API_KEY = "{{ MI_API_KEY }}";
+    </script>
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 form-container">
+    <form id="complete-work-order-form">
+        <h2>Submit Work Order</h2>
+        <label for="venue-select" class="sr-only">Select Venue</label>
+        <select id="venue-select" required>
+            <option value="" disabled selected>Select Venue</option>
+        </select>
+        <label for="building-select" class="sr-only">Select Building</label>
+        <select id="building-select" required>
+            <option value="" disabled selected>Select Building</option>
+        </select>
+        <label for="building-address" class="sr-only">Building Address:</label>
+        <div id="building-address"></div>
+
+    </form>
+
+    <form id="work-order-form">
+        <label for="requester-name" class="sr-only">Your Name</label>
+        <input type="text" id="requester-name" name="requester-name" required placeholder="Your Name">
+        <label for="requester-contact" class="sr-only">Your Email</label>
+        <input type="text" id="requester-contact" name="requester-contact" required placeholder="Your Email">
+        <section id="location-info">
+            <h2>Specify Issue Location</h2>
+            <mi-search id="search-input" class="custom-search" mapsindoors="true" google="false" mi-take=15 placeholder="Search or Tap on the Map"></mi-search>
+            <mi-list id="search-list"></mi-list>
+            <table class="styled-table">
+                <tr>
+                    <td>Name</td>
+                    <td id="location-name"></td>
+                    <td>Building</td>
+                    <td id="location-building"></td>
+                </tr>
+                <tr>
+                    <td>Venue</td>
+                    <td id="location-venue"></td>
+                    <td>Floor Name</td>
+                    <td id="location-floor"></td>
+                </tr>
+                <tr>
+                    <td>Type</td>
+                    <td id="location-type"></td>
+                    <td>Ticket ID</td>
+                    <td id="location-externalId"></td>
+                </tr>
+            </table>
+        </section>
+        
+        <label for="categorySelector" class="sr-only">Select Category</label>
+        <select name="category" id="categorySelector" required>
+            <option value="" disabled selected>Select Category</option>
+            {% for category in categories %}
+            <option value="{{ category.category_id }}" data-building-id="{{ category.building_id }}">{{ category.category_title }} (ID: {{ category.category_id }}, Building ID: {{ category.building_id }})</option>
+            {% endfor %}
+        </select>
+        <label for="work-order-description" class="sr-only">Description</label>
+        <textarea id="work-order-description" name="work-order-description" rows="4" required placeholder="Description"></textarea>
+        <label for="work-order-date" class="sr-only">Date Needed</label>
+        <input type="date" id="work-order-date" name="work-order-date"required>
+        <label for="work-order-attachment" class="sr-only">Add Attachment</label>
+        <input type="file" id="work-order-attachment" name="work-order-attachment" accept="image/png, image/jpeg, image/jpg, image/gif, image/webp">
+        <button type="submit">Submit</button>
+    </form>
+        <div id="successMessage" style="display:none;">
+        <a href="" id="linkUrbest" target="_blank" class="btn btn-link">See issue in Urbest.io (req login)</a><br>
+        <a href="" id="linkMap" target="_blank" class="btn btn-link">See Location on in wayfinding app</a>
+    </div>
+</div>
+
+            <div class="col-lg-6 map-container">
+                <div id="map" class="map"></div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.6/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
